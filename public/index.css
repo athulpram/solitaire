@@ -1,0 +1,13 @@
+.playing-card-red {
+  color: balck;
+  font-size: 200px;
+  cursor: pointer;
+  color: red;
+}
+
+.playing-card-black {
+  color: balck;
+  font-size: 200px;
+  cursor: pointer;
+  color: black;
+}

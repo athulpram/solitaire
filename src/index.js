@@ -1,12 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import Card from "./card.js";
+import CARDS from "./cardConstants";
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const cardSymbols = Object.values(CARDS);
+const redCards = cardSymbols.map(value => (
+  <Card card={value} cardType="playing-card-red" />
+));
+const blackCards = cardSymbols.map(value => (
+  <Card card={value} cardType="playing-card-black" />
+));
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+const elements = [...redCards, ...blackCards];
+
+ReactDOM.render(<div>{elements}</div>, document.getElementById("root"));
