@@ -7,7 +7,10 @@ class PlayingCard {
   }
 
   getCard() {
-    return this.card;
+    if (this.faceUp) {
+      return this.card;
+    }
+    return "\uD83C\uDCA0";
   }
 
   canCategorizeOnTopOf(otherCard) {
@@ -24,8 +27,21 @@ class PlayingCard {
     return true;
   }
 
+  getSuit() {
+    if (this.faceUp) {
+      return this.suit;
+    }
+    return "spade";
+  }
+
   isFaceUp() {
     return this.faceUp;
+  }
+  setFaceUP() {
+    this.faceUp = true;
+  }
+  setFaceDown() {
+    this.faceUp = false;
   }
 }
 

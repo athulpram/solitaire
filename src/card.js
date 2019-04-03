@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 const COLOR = {
   heart: "playing-card-red",
   spade: "playing-card-black",
@@ -6,12 +6,12 @@ const COLOR = {
   diamond: "playing-card-red"
 };
 
-const Card = function(props) {
-  return (
-    <div className={COLOR[props.cardProps.suit]}>
-      <span>{props.cardProps.card}</span>
-    </div>
-  );
-};
-
-export default Card;
+export default class Card extends Component {
+  render() {
+    return (
+      <div className={COLOR[this.props.cardProps.suit]}>
+        <span>{this.props.cardProps.card}</span>
+      </div>
+    );
+  }
+}

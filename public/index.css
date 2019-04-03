@@ -35,3 +35,9 @@
 
   border-radius: 5px;
 }
+
+.categorization-board {
+  border: 1px solid black;
+
+  display: flex;
+}

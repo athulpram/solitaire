@@ -25,6 +25,10 @@ class Game {
   checkCard() {
     this.drawStack.checkCard();
   }
+
+  getCategorizationData() {
+    return this.categorizationBoard.getData();
+  }
 }
 
 export default Game;

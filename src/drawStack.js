@@ -11,7 +11,10 @@ class DrawStack {
   }
 
   checkCard() {
-    this.discardStack.addCard(this.drawStack.removeCard());
+    const card = this.drawStack.removeCard();
+    console.log(card);
+    card.setFaceUP();
+    this.discardStack.addCard(card);
   }
 
   selectCardForCategorizing() {

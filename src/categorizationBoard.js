@@ -13,7 +13,15 @@ class CategorizationBoard {
     ];
   }
   initialize(cards) {
-    console.log(cards.length);
+    let numberOfCards = 1;
+    this.categorizationPiles.forEach(pile => {
+      pile.addCards(cards.splice(cards.length - numberOfCards));
+      numberOfCards++;
+      console.log(cards.length);
+    });
+  }
+  getData() {
+    return this.categorizationPiles.map(pile => pile.getData());
   }
 }
 
