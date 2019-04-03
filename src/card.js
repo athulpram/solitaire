@@ -8,7 +8,9 @@ const COLOR = {
 
 const Card = function(props) {
   return (
-    <div className={COLOR[props.cardProps.suit]}>{props.cardProps.card}</div>
+    <div className={COLOR[props.cardProps.suit]}>
+      <span>{props.cardProps.card}</span>
+    </div>
   );
 };
 

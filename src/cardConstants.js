@@ -1,6 +1,6 @@
 const CARDS = {
+  BACK: "\uD83C\uDCA0",
   SPADES: [
-    "\u{1F0A1}",
     "\u{1F0A1}",
     "\u{1F0A2}",
     "\u{1F0A3}",
@@ -12,6 +12,7 @@ const CARDS = {
     "\u{1F0A9}",
     "\u{1F0AA}",
     "\u{1F0AB}",
+    "\u{1F0AC}",
     "\u{1F0AD}",
     "\u{1F0AE}"
   ],
