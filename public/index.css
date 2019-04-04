@@ -41,3 +41,12 @@
 
   display: flex;
 }
+
+.suit-stack {
+  display: flex;
+  margin: 10px;
+}
+.top-half-game-board {
+  display: flex;
+  justify-content: space-between;
+}

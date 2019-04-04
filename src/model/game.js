@@ -1,11 +1,13 @@
 import drawStack from "./drawStack";
 import lodash from "lodash";
 import CategorizationBoard from "./categorizationBoard";
+import SuitStack from "./suitStack";
 
 class Game {
   constructor() {
     this.drawStack = new drawStack();
     this.categorizationBoard = new CategorizationBoard();
+    this.suitStack = new SuitStack();
   }
 
   startGame(deck) {

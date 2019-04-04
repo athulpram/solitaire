@@ -1,7 +1,8 @@
-import Game from "./game";
+import Game from "./model/game";
 import React, { Component } from "react";
+import SuitStackView from "./suitStackView";
 import CategorizationBoardView from "./categorizationBoardView";
-import createDeck from "./deck";
+import createDeck from "./model/deck";
 import DiscardStackView from "./discardStackView";
 
 export default class GameView extends Component {
@@ -14,14 +15,15 @@ export default class GameView extends Component {
 
     game.startGame(deck);
     game.checkCard();
-    
+
     this.state = {
       discardStack: (
         <DiscardStackView topCard={game.getTopCardOfDiscardStack()} />
       ),
       categorizationBoard: (
         <CategorizationBoardView piles={game.getCategorizationData()} />
-      )
+      ),
+      suitStack: <SuitStackView />
     };
     console.log(this.state + "state of game");
   }
@@ -32,7 +34,10 @@ export default class GameView extends Component {
   render() {
     return (
       <div class="game-view">
-        {this.state.discardStack}
+        <div className="top-half-game-board">
+          {this.state.discardStack}
+          {this.state.suitStack}
+        </div>
         {this.state.categorizationBoard}
       </div>
     );
