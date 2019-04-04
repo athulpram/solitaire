@@ -8,20 +8,18 @@ import DiscardStackView from "./discardStackView";
 export default class GameView extends Component {
   constructor(props) {
     super(props);
-    console.log("Inside constructor");
-
     const deck = createDeck();
-    const game = new Game();
+    this.game = new Game();
 
-    game.startGame(deck);
-    game.checkCard();
+    this.game.startGame(deck);
+    this.game.checkCard();
 
     this.state = {
       discardStack: (
-        <DiscardStackView topCard={game.getTopCardOfDiscardStack()} />
+        <DiscardStackView topCard={this.game.getTopCardOfDiscardStack()} />
       ),
       categorizationBoard: (
-        <CategorizationBoardView piles={game.getCategorizationData()} />
+        <CategorizationBoardView piles={this.game.getCategorizationData()} />
       ),
       suitStack: <SuitStackView />
     };
@@ -31,12 +29,28 @@ export default class GameView extends Component {
     console.log("component mounted successfully");
   }
 
+  changeCard() {
+    this.game.checkCard();
+    const state = {
+      discardStack: (
+        <DiscardStackView topCard={this.game.getTopCardOfDiscardStack()} />
+      ),
+      categorizationBoard: (
+        <CategorizationBoardView piles={this.game.getCategorizationData()} />
+      ),
+      suitStack: <SuitStackView />
+    };
+    this.setState(state);
+  }
+
   render() {
     return (
       <div class="game-view">
         <div className="top-half-game-board">
-          {this.state.discardStack}
-          {this.state.suitStack}
+          <div onClick={e => this.changeCard(e)}>
+            {this.state.discardStack}
+            {this.state.suitStack}
+          </div>
         </div>
         {this.state.categorizationBoard}
       </div>

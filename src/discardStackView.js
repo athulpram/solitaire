@@ -3,10 +3,15 @@ import CARDS from "./model/cardConstants";
 import Card from "./card";
 
 export default class DiscardStackView extends Component {
+  changeCard() {
+    
+  }
   render() {
     return (
       <div className={"discard-stack-set"}>
-        <Card cardProps={{ suit: "spade", card: CARDS.BACK }} />
+        <div onClick={this.changeCard}>
+          <Card cardProps={{ suit: "spade", card: CARDS.BACK }} />
+        </div>
         <Card
           cardProps={{
             card: this.props.topCard.getCard(),
