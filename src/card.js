@@ -7,11 +7,14 @@ const COLOR = {
 };
 
 export default class Card extends Component {
+  onDragStart(ev) {
+    ev.dataTransfer.setData("id", this.props.cardProps.card);
+  }
   render() {
     return (
       <div
         className={COLOR[this.props.cardProps.suit]}
-        onDragStart={e => e.dataTransfer.setData(e, this.props.cardProps.card)}
+        onDragStart={e => this.onDragStart(e)}
         draggable={this.props.cardProps.card !== "\uD83C\uDCA0"}
         id={this.props.cardProps.card}
       >

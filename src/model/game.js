@@ -31,6 +31,50 @@ class Game {
   getCategorizationData() {
     return this.categorizationBoard.getData();
   }
+
+  getSuitData() {
+    const data = this.suitStack.getData();
+    return data;
+  }
+
+  categorizeCard(cardId) {
+    let searchData = this.categorizationBoard.getCard(cardId);
+    if (!searchData) {
+      searchData = {};
+      searchData.card = this.getTopCardOfDiscardStack();
+      searchData.fromPile = undefined;
+    }
+
+    if (this.suitStack.addCard(searchData.card)) {
+      if (searchData.fromPile) {
+        this.categorizationBoard.deleteCardFrom(searchData.fromPile, cardId);
+      } else {
+        searchData.card = this.drawStack.removeCard();
+      }
+    }
+  }
+
+  rearrangeCard(pileId, cardId) {
+    let searchData = this.categorizationBoard.getCard(cardId);
+    if (!searchData) {
+      searchData = {};
+      searchData.card = this.getTopCardOfDiscardStack();
+      searchData.fromPile = undefined;
+    }
+    const status = this.categorizationBoard.addCardToPile(
+      pileId,
+      searchData.card
+    );
+    if (status) {
+      if (searchData.fromPile) {
+        console.log("reached here " + status);
+
+        this.categorizationBoard.deleteCardFrom(searchData.fromPile, cardId);
+      } else {
+        searchData.card = this.drawStack.removeCard();
+      }
+    }
+  }
 }
 
 export default Game;

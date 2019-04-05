@@ -1,9 +1,9 @@
 import Game from "./model/game";
 import React, { Component } from "react";
 import SuitStackView from "./suitStackView";
-import CategorizationBoardView from "./categorizationBoardView";
 import createDeck from "./model/deck";
 import DiscardStackView from "./discardStackView";
+import Pile from "./pileView";
 
 export default class GameView extends Component {
   constructor(props) {
@@ -18,37 +18,81 @@ export default class GameView extends Component {
       discardStack: (
         <DiscardStackView topCard={this.game.getTopCardOfDiscardStack()} />
       ),
-      categorizationBoard: (
-        <CategorizationBoardView piles={this.game.getCategorizationData()} />
+      categorizationBoard: this.createCategorizationBoard(
+        this.game.getCategorizationData()
       ),
-      suitStack: <SuitStackView />
+      suitStack: <SuitStackView piles={this.game.getSuitData()} />
     };
-    console.log(this.state + "state of game");
   }
-  componentDidMount() {
-    console.log("component mounted successfully");
-  }
+  componentDidMount() {}
 
   changeCard() {
     this.game.checkCard();
+    this.updateState();
+  }
+
+  updateState() {
+    const suitStackData = this.game.getSuitData();
+    const drawData = this.game.getTopCardOfDiscardStack();
+    const categorizeData = this.game.getCategorizationData();
+    const categorizeBoard = this.createCategorizationBoard(categorizeData);
+
     const state = {
-      discardStack: (
-        <DiscardStackView topCard={this.game.getTopCardOfDiscardStack()} />
-      ),
-      categorizationBoard: (
-        <CategorizationBoardView piles={this.game.getCategorizationData()} />
-      ),
-      suitStack: <SuitStackView />
+      discardStack: <DiscardStackView topCard={drawData} />,
+      categorizationBoard: categorizeBoard,
+      suitStack: <SuitStackView piles={suitStackData} />
     };
     this.setState(state);
+  }
+
+  onDragOver(e) {
+    e.preventDefault();
+  }
+  onDropFunc(e) {
+    const cardId = e.dataTransfer.getData("id");
+    this.game.categorizeCard(cardId);
+    this.updateState();
+  }
+
+  categorizeCard(pileId, e) {
+    const cardId = e.dataTransfer.getData("id");
+
+    this.game.rearrangeCard(pileId, cardId);
+    this.updateState();
+  }
+
+  createCategorizationBoard(categorizeData) {
+    const piles = categorizeData.map((pile, index) => {
+      return (
+        <div
+          onDragOver={e => {
+            this.onDragOver(e);
+          }}
+          onDrop={e => {
+            this.categorizeCard(index, e);
+          }}
+        >
+          <Pile cards={pile} />
+        </div>
+      );
+    });
+
+    return <div class="categorization-board">{piles}</div>;
   }
 
   render() {
     return (
       <div class="game-view">
         <div className="top-half-game-board">
-          <div onClick={e => this.changeCard(e)}>
-            {this.state.discardStack}
+          <div onClick={e => this.changeCard(e)}>{this.state.discardStack}</div>
+          <div
+            onDragOver={e => {
+              this.onDragOver(e);
+            }}
+            onDrop={e => {
+              this.onDropFunc(e);
+            }}
+          >
             {this.state.suitStack}
           </div>
         </div>

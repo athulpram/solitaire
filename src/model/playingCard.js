@@ -34,6 +34,10 @@ class PlayingCard {
     return "spade";
   }
 
+  getRank() {
+    return this.rank;
+  }
+
   isFaceUp() {
     return this.faceUp;
   }

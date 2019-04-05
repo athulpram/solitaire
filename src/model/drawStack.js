@@ -11,14 +11,22 @@ class DrawStack {
   }
 
   checkCard() {
+    if (this.drawStack.getLength() <= 0) {
+      const cards = this.discardStack.removeAllCards();
+      this.drawStack.addCards(cards);
+    }
+
     const card = this.drawStack.removeCard();
-    console.log(card);
     card.setFaceUP();
     this.discardStack.addCard(card);
   }
 
   selectCardForCategorizing() {
     return this.discardStack.removeCard();
+  }
+
+  removeCard() {
+    this.discardStack.removeCard();
   }
 
   getTopCardOfDiscradStack() {

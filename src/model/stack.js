@@ -8,10 +8,10 @@ class Stack {
   }
 
   addCards(cards) {
-    this.stack.concat(cards);
+    this.stack = this.stack.concat(cards);
   }
 
-  removeCard(card) {
+  removeCard() {
     return this.stack.pop();
   }
 
@@ -23,6 +23,9 @@ class Stack {
 
   getTopCard() {
     return this.stack[this.stack.length - 1];
+  }
+  getLength() {
+    return this.stack.length;
   }
 }
 
