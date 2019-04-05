@@ -18,7 +18,7 @@ export default class Card extends Component {
         draggable={this.props.cardProps.card !== "\uD83C\uDCA0"}
         id={this.props.cardProps.card}
       >
-        <span>{this.props.cardProps.card}</span>
+        <span className="symbol-span">{this.props.cardProps.card}</span>
       </div>
     );
   }

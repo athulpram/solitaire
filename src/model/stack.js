@@ -22,7 +22,10 @@ class Stack {
   }
 
   getTopCard() {
-    return this.stack[this.stack.length - 1];
+    console.log(this.stack.length);
+    if (this.stack.length) {
+      return this.stack[this.stack.length - 1];
+    }
   }
   getLength() {
     return this.stack.length;

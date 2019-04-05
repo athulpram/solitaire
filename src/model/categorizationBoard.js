@@ -30,16 +30,6 @@ class CategorizationBoard {
 
     return searchData.find(data => data.card);
   }
-  removeCard(cardId) {
-    let status = this.categorizationPiles[0].removeCard(cardId);
-    status = status || this.categorizationPiles[1].removeCard(cardId);
-    status = status || this.categorizationPiles[2].removeCard(cardId);
-    status = status || this.categorizationPiles[3].removeCard(cardId);
-    status = status || this.categorizationPiles[4].removeCard(cardId);
-    status = status || this.categorizationPiles[5].removeCard(cardId);
-    status = status || this.categorizationPiles[6].removeCard(cardId);
-    return status;
-  }
 
   deleteCardFrom(pileId, cardId) {
     return this.categorizationPiles[pileId].removeCard(cardId);

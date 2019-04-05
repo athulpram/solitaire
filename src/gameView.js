@@ -37,6 +37,8 @@ export default class GameView extends Component {
     const categorizeData = this.game.getCategorizationData();
     const categorizeBoard = this.createCategorizationBoard(categorizeData);
 
+    console.log("this sadkfdf" +JSON.stringify(drawData));
+    
     const state = {
       discardStack: <DiscardStackView topCard={drawData} />,
       categorizationBoard: categorizeBoard,
@@ -62,6 +64,7 @@ export default class GameView extends Component {
   }
 
   createCategorizationBoard(categorizeData) {
+    console.log("categorize data ..... " + JSON.stringify(categorizeData));
     const piles = categorizeData.map((pile, index) => {
       return (
         <div
@@ -71,6 +74,7 @@ export default class GameView extends Component {
           onDrop={e => {
             this.categorizeCard(index, e);
           }}
+          className="categorize-pile"
         >
           <Pile cards={pile} />
         </div>

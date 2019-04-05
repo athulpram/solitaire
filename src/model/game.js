@@ -46,7 +46,7 @@ class Game {
     }
 
     if (this.suitStack.addCard(searchData.card)) {
-      if (searchData.fromPile) {
+      if (searchData.fromPile >= 0) {
         this.categorizationBoard.deleteCardFrom(searchData.fromPile, cardId);
       } else {
         searchData.card = this.drawStack.removeCard();
@@ -66,7 +66,7 @@ class Game {
       searchData.card
     );
     if (status) {
-      if (searchData.fromPile) {
+      if (searchData.fromPile >= 0) {
         console.log("reached here " + status);
 
         this.categorizationBoard.deleteCardFrom(searchData.fromPile, cardId);

@@ -19,6 +19,14 @@
   display: flex;
 }
 
+.categorization-board .playing-card-black {
+  margin-top: -150px;
+}
+
+.categorization-board .playing-card-red {
+  margin-top: -150px;
+}
+
 .playing-card-black {
   font-size: 200px;
   cursor: pointer;
@@ -39,6 +47,8 @@
 .categorization-board {
   border: 1px solid black;
 
+  padding-top: 200px;
+
   display: flex;
 }
 
@@ -49,4 +59,14 @@
 .top-half-game-board {
   display: flex;
   justify-content: space-between;
+}
+
+.categorize-pile {
+  width: 300px;
+}
+
+.symbol-span {
+  background: whitesmoke;
+  border: 1px solid black;
+  border-radius: 7px;
 }
