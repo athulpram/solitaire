@@ -19,8 +19,10 @@ class Pile {
 
   getCard(cardId) {
     if (this.pile.length > 0) {
-      if (cardId == this.pile[this.pile.length - 1].getCard()) {
-        return this.pile[this.pile.length - 1];
+      const card = this.pile.find(card => card.getCard() == cardId);
+      if (card) {
+        const index = this.pile.findIndex(arrayCard => arrayCard == card);
+        return this.pile.slice(index);
       }
     }
   }
@@ -28,8 +30,10 @@ class Pile {
     if (this.pile.length == 0) {
       return false;
     }
-    if (cardId == this.pile[this.pile.length - 1].getCard()) {
-      this.pile.pop();
+    const card = this.pile.find(card => card.getCard() == cardId);
+    if (card) {
+      const index = this.pile.findIndex(arrayCard => arrayCard == card);
+      this.pile.splice(index);
       if (this.pile.length > 0) {
         this.pile[this.pile.length - 1].setFaceUP();
       }
@@ -38,24 +42,19 @@ class Pile {
     return false;
   }
 
-  categorizeCard(card) {
+  categorizeCard(cards) {
     if (this.pile.length == 0) {
-      if (card.getRank() == 12) {
-        this.pile.push(card);
+      if (cards[0].getRank() == 12) {
+        this.pile = this.pile.concat(cards);
         return true;
       }
       return false;
     }
     const topCard = this.pile[this.pile.length - 1];
-    console.log(JSON.stringify(topCard) + JSON.stringify(card));
-    console.log(
-      JSON.stringify(card) +
-        "condition status " +
-        card.canCategorizeOnTopOf(topCard)
-    );
-    if (card.canCategorizeOnTopOf(topCard)) {
+
+    if (cards[0].canCategorizeOnTopOf(topCard)) {
       console.log("reached inside");
-      this.pile.push(card);
+      this.pile = this.pile.concat(cards);
       return true;
     }
     return false;

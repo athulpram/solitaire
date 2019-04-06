@@ -35,8 +35,8 @@ class CategorizationBoard {
     return this.categorizationPiles[pileId].removeCard(cardId);
   }
 
-  addCardToPile(pileId, card) {
-    const status = this.categorizationPiles[pileId].categorizeCard(card);
+  addCardToPile(pileId, cards) {
+    const status = this.categorizationPiles[pileId].categorizeCard(cards);
     return status;
   }
 }

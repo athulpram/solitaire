@@ -37,8 +37,8 @@ export default class GameView extends Component {
     const categorizeData = this.game.getCategorizationData();
     const categorizeBoard = this.createCategorizationBoard(categorizeData);
 
-    console.log("this sadkfdf" +JSON.stringify(drawData));
-    
+    console.log("this sadkfdf" + JSON.stringify(drawData));
+
     const state = {
       discardStack: <DiscardStackView topCard={drawData} />,
       categorizationBoard: categorizeBoard,
@@ -89,6 +89,9 @@ export default class GameView extends Component {
       <div class="game-view">
         <div className="top-half-game-board">
           <div onClick={e => this.changeCard(e)}>{this.state.discardStack}</div>
+          <div class="heading-div">
+            <span>Solitare</span>
+          </div>
           <div
             onDragOver={e => {
               this.onDragOver(e);

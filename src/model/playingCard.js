@@ -1,3 +1,10 @@
+const COLOR = {
+  heart: "red",
+  clubs: "black",
+  spade: "black",
+  diamond: "red"
+};
+
 class PlayingCard {
   constructor(card, suit, rank) {
     this.card = card;
@@ -14,7 +21,10 @@ class PlayingCard {
   }
 
   canCategorizeOnTopOf(otherCard) {
-    if (this.rank === otherCard.rank - 1) {
+    if (
+      this.rank === otherCard.rank - 1 &&
+      COLOR[this.suit] != COLOR[otherCard.suit]
+    ) {
       return true;
     }
     return false;

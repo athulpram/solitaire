@@ -2,6 +2,7 @@ import drawStack from "./drawStack";
 import lodash from "lodash";
 import CategorizationBoard from "./categorizationBoard";
 import SuitStack from "./suitStack";
+import CARDS from "./cardConstants";
 
 class Game {
   constructor() {
@@ -39,11 +40,17 @@ class Game {
 
   categorizeCard(cardId) {
     let searchData = this.categorizationBoard.getCard(cardId);
+
     if (!searchData) {
       searchData = {};
-      searchData.card = this.getTopCardOfDiscardStack();
+      searchData.card = [this.getTopCardOfDiscardStack()];
       searchData.fromPile = undefined;
     }
+    if (searchData.fromPile && searchData.card.length > 1) {
+      return;
+    }
+
+    searchData.card = searchData.card[0];
 
     if (this.suitStack.addCard(searchData.card)) {
       if (searchData.fromPile >= 0) {
@@ -58,7 +65,7 @@ class Game {
     let searchData = this.categorizationBoard.getCard(cardId);
     if (!searchData) {
       searchData = {};
-      searchData.card = this.getTopCardOfDiscardStack();
+      searchData.card = [this.getTopCardOfDiscardStack()];
       searchData.fromPile = undefined;
     }
     const status = this.categorizationBoard.addCardToPile(
@@ -67,8 +74,6 @@ class Game {
     );
     if (status) {
       if (searchData.fromPile >= 0) {
-        console.log("reached here " + status);
-
         this.categorizationBoard.deleteCardFrom(searchData.fromPile, cardId);
       } else {
         searchData.card = this.drawStack.removeCard();
