@@ -5,25 +5,23 @@ import Card from "./card";
 export default class DiscardStackView extends Component {
   changeCard() {}
   render() {
-    let cardSymbol = "";
-    let cardSuit = "spade";
-
+    let topCard = "";
     if (this.props.topCard) {
-      cardSymbol = this.props.topCard.getCard();
-      cardSuit = this.props.topCard.getSuit();
+      topCard = (
+        <Card
+          cardProps={{
+            card: this.props.topCard.getCard(),
+            suit: this.props.topCard.getSuit()
+          }}
+        />
+      );
     }
-
     return (
       <div className={"discard-stack-set"}>
         <div onClick={this.changeCard}>
           <Card cardProps={{ suit: "spade", card: CARDS.BACK }} />
         </div>
-        <Card
-          cardProps={{
-            card: cardSymbol,
-            suit: cardSuit
-          }}
-        />
+        {topCard}
       </div>
     );
   }

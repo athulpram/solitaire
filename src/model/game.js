@@ -2,7 +2,8 @@ import drawStack from "./drawStack";
 import lodash from "lodash";
 import CategorizationBoard from "./categorizationBoard";
 import SuitStack from "./suitStack";
-import CARDS from "./cardConstants";
+
+const CARDS_IN_CATEGORIZATION_BOARD = 28;
 
 class Game {
   constructor() {
@@ -13,9 +14,9 @@ class Game {
 
   startGame(deck) {
     deck = lodash.shuffle(deck);
-
-    this.categorizationBoard.initialize(deck.splice(deck.length - 28));
-
+    this.categorizationBoard.initialize(
+      deck.splice(deck.length - CARDS_IN_CATEGORIZATION_BOARD)
+    );
     for (let i = 0; i < deck.length; i++) {
       this.drawStack.addCard(deck.pop());
     }
@@ -38,7 +39,7 @@ class Game {
     return data;
   }
 
-  categorizeCard(cardId) {
+  findCard(cardId) {
     let searchData = this.categorizationBoard.getCard(cardId);
 
     if (!searchData) {
@@ -46,6 +47,11 @@ class Game {
       searchData.card = [this.getTopCardOfDiscardStack()];
       searchData.fromPile = undefined;
     }
+    return searchData;
+  }
+
+  categorizeCard(cardId) {
+    const searchData = this.findCard(cardId);
     if (searchData.fromPile && searchData.card.length > 1) {
       return;
     }
@@ -55,19 +61,14 @@ class Game {
     if (this.suitStack.addCard(searchData.card)) {
       if (searchData.fromPile >= 0) {
         this.categorizationBoard.deleteCardFrom(searchData.fromPile, cardId);
-      } else {
-        searchData.card = this.drawStack.removeCard();
+        return;
       }
+      searchData.card = this.drawStack.removeCard();
     }
   }
 
   rearrangeCard(pileId, cardId) {
-    let searchData = this.categorizationBoard.getCard(cardId);
-    if (!searchData) {
-      searchData = {};
-      searchData.card = [this.getTopCardOfDiscardStack()];
-      searchData.fromPile = undefined;
-    }
+    const searchData = this.findCard(cardId);
     const status = this.categorizationBoard.addCardToPile(
       pileId,
       searchData.card
@@ -75,9 +76,9 @@ class Game {
     if (status) {
       if (searchData.fromPile >= 0) {
         this.categorizationBoard.deleteCardFrom(searchData.fromPile, cardId);
-      } else {
-        searchData.card = this.drawStack.removeCard();
+        return;
       }
+      searchData.card = this.drawStack.removeCard();
     }
   }
 }
