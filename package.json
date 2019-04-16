@@ -2,7 +2,7 @@
   "name": "solitare",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://athulpram.github.io/solitare",
+  "homepage": "https://athulpram.github.io/solitaire",
   "dependencies": {
     "gh-pages": "^2.0.1",
     "lodash": "^4.17.11",
